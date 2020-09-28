@@ -1,6 +1,6 @@
 {
   "name": "doh-js-client",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "DNS-over-HTTPS/DNS-over-TLS client for nodejs.",
   "main": "dist/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "DoT",
     "DNS-over-TLS"
   ],
-  "author": "Peter Lai <alk03073135@gmail.com>",
+  "author": "Peter Lai <alk03073135@gmail.com>, Russell McConnachie <russell@mcconnachie.ca>",
   "license": "MIT",
   "dependencies": {
     "native-dns-packet": "^0.1.1",
@@ -21,9 +21,9 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.15",
-    "@types/node": "^14.0.6",
+    "@types/node": "^14.11.2",
     "jest": "^24.8.0",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.5.3"
+    "typescript": "^3.9.7"
   }
 }
