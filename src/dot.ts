@@ -10,7 +10,8 @@ function DoT (provider: string, keyPath: string, certPath: string) {
         google: 'dns.google',
         cloudflare: '1.1.1.1',
         cleanbrowsing: '185.228.169.154',
-        quad9: '9.9.9.9'
+        quad9: '9.9.9.9',
+        opendns: '208.67.220.220'
       },
       writable: false
     },
@@ -22,7 +23,7 @@ function DoT (provider: string, keyPath: string, certPath: string) {
     },
   })
   if (typeof this.providers[provider] === 'undefined') {
-    throw new Error('We only support these provider: google, cleanbrowsing, cloudflare')
+    throw new Error('We only support these provider: google, cleanbrowsing, cloudflare, opendns')
   }
   const key = fs.readFileSync(keyPath)
   const cert = fs.readFileSync(certPath)
@@ -71,11 +72,11 @@ DoT.prototype.resolve = function (domainName: string, domainType: string) {
       key: key,
       cert: cert,
       // ca: [],
-      checkServerIdentity: () => { 
+      checkServerIdentity: () => {
         return null
       },
     }
-    
+
     const socket = tls.connect(853, uri, options, () => {
       if (socket.authorized) {
         socket.write(msgBuf)

@@ -17,7 +17,7 @@ function DoH (provider: string) {
     }
   })
   if (typeof this.providers[provider] === 'undefined') {
-    throw new Error('We only support these provider: google, cleanbrowsing, cloudflare')
+    throw new Error('We only support these provider: google, cleanbrowsing, cloudflare, opendns, umbrella')
   }
   this.provider = provider
   this.uri = this.providers[this.provider]
@@ -38,13 +38,13 @@ DoH.prototype.setProvider = function (provider :string) {
   this.uri = this.providers[this.provider]
 }
 
-DoH.prototype.resolve = function (domainName: string, domainType: string) {
-  let type = Util.getDomainType(domainType)
+DoH.prototype.resolve = function (domainName: string, domainType: string, method: string = "GET") {
+  let dnsType = Util.getDomainType(domainType)
   let dnsPacket = new Packet()
   let dnsBuf = Util.newBuffer(128)
   dnsPacket.question.push({
     name: domainName,
-    type: type,
+    type: dnsType,
     class: 1
   })
   Packet.write(dnsBuf, dnsPacket)
@@ -53,7 +53,7 @@ DoH.prototype.resolve = function (domainName: string, domainType: string) {
   let query = `${this.uri}?dns=${dnsBuf.toString('base64').replace(/=+/, '')}`
   return new Promise(function (resolve, reject) {
     let xhr = new XHR2()
-    xhr.open('GET', query, true)
+    xhr.open(method, query, true)
     xhr.setRequestHeader('Accept', 'application/dns-message')
     xhr.setRequestHeader('Content-type', 'application/dns-message')
     xhr.responseType = 'arraybuffer'
