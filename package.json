@@ -3,7 +3,9 @@
   "version": "0.3.0",
   "description": "DNS-over-HTTPS/DNS-over-TLS client for nodejs.",
   "main": "dist/index.js",
+  "preinstall":
   "scripts": {
+    "prepare": "npm run build",
     "build": "tsc -p ./tsconfig.json",
     "test": "jest"
   },
