@@ -9,7 +9,9 @@ function DoH (provider: string) {
         google: 'https://dns.google/dns-query',
         cloudflare: 'https://cloudflare-dns.com/dns-query',
         cleanbrowsing: 'https://doh.cleanbrowsing.org/doh/family-filter',
-        quad9: 'https://dns9.quad9.net/dns-query'
+        quad9: 'https://dns9.quad9.net/dns-query',
+        opendns: 'https://doh.opendns.com/dns-query',
+        umbrella: 'https://doh.umbrella.com/dns-query',
       },
       writable: false
     }
